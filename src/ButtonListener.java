@@ -10,21 +10,53 @@ import java.awt.event.ActionListener;
  * @Version 1.0
  */
 public class ButtonListener implements ActionListener {
-    Calculate calculate = new Calculate();
-    JTextField jTextField;
-    final String ZERO = "0";
-    double number = 0;
+    /**
+     * 运算符标记
+     */
     static int symbol = 0;
+    /**
+     * 文本框内容是否为初始状态
+     */
     static boolean flag = true;
+    /**
+     * 运算是否结束
+     */
     static boolean end = false;
+    /**
+     * 字符0常量
+     */
+    final String ZERO = "0";
+    /**
+     * 保存文本框信息
+     */
+    JTextField jTextField;
+    /**
+     * 计算对象
+     */
+    Calculate calculate = new Calculate();
+    /**
+     * 计算结果
+     */
+    double number = 0;
 
+    /**
+     * @param jTextField 传入文本框信息。
+     */
     ButtonListener(JTextField jTextField) {
         this.jTextField = jTextField;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        /*
+        获取按钮信息
+         */
         JButton jButton = (JButton) e.getSource();
+
+
+        /*
+        运算符判断以及操作
+         */
         if (jButton.equals(Gui.plus)) {
             if (symbol != 0) {
                 number = calculate.calculate(symbol, number, Double.parseDouble(jTextField.getText()));
@@ -64,13 +96,18 @@ public class ButtonListener implements ActionListener {
         if (jButton.equals(Gui.equal)) {
             jTextField.setText(String.valueOf(calculate.calculate(symbol, number, Double.parseDouble(jTextField.getText()))));
             end = true;
-            symbol=0;
+            symbol = 0;
         }
+
+
+        /*
+        数字按钮判断以操作
+         */
         if (jButton.equals(Gui.zero)) {
             if (flag || end) {
                 jTextField.setText(ZERO);
                 flag = false;
-                end=false;
+                end = false;
             } else {
                 if (ZERO.equals(jTextField.getText())) {
                     jTextField.setText(ZERO);
@@ -83,7 +120,7 @@ public class ButtonListener implements ActionListener {
             if (flag || end) {
                 jTextField.setText("1");
                 flag = false;
-                end=false;
+                end = false;
             } else {
                 if (ZERO.equals(jTextField.getText())) {
                     jTextField.setText("1");
@@ -96,7 +133,7 @@ public class ButtonListener implements ActionListener {
             if (flag || end) {
                 jTextField.setText("2");
                 flag = false;
-                end=false;
+                end = false;
             } else {
                 if (ZERO.equals(jTextField.getText())) {
                     jTextField.setText("2");
@@ -109,7 +146,7 @@ public class ButtonListener implements ActionListener {
             if (flag || end) {
                 jTextField.setText("3");
                 flag = false;
-                end=false;
+                end = false;
             } else {
                 if (ZERO.equals(jTextField.getText())) {
                     jTextField.setText("3");
@@ -122,7 +159,7 @@ public class ButtonListener implements ActionListener {
             if (flag || end) {
                 jTextField.setText("4");
                 flag = false;
-                end=false;
+                end = false;
             } else {
                 if (ZERO.equals(jTextField.getText())) {
                     jTextField.setText("4");
@@ -132,10 +169,10 @@ public class ButtonListener implements ActionListener {
             }
         }
         if (jButton.equals(Gui.five)) {
-            if (flag||end) {
+            if (flag || end) {
                 jTextField.setText("5");
                 flag = false;
-                end=false;
+                end = false;
             } else {
                 if (ZERO.equals(jTextField.getText())) {
                     jTextField.setText("5");
@@ -145,10 +182,10 @@ public class ButtonListener implements ActionListener {
             }
         }
         if (jButton.equals(Gui.six)) {
-            if (flag||end) {
+            if (flag || end) {
                 jTextField.setText("6");
                 flag = false;
-                end=false;
+                end = false;
             } else {
                 if (ZERO.equals(jTextField.getText())) {
                     jTextField.setText("6");
@@ -158,10 +195,10 @@ public class ButtonListener implements ActionListener {
             }
         }
         if (jButton.equals(Gui.seven)) {
-            if (flag||end) {
+            if (flag || end) {
                 jTextField.setText("7");
                 flag = false;
-                end=false;
+                end = false;
             } else {
                 if (ZERO.equals(jTextField.getText())) {
                     jTextField.setText("7");
@@ -171,10 +208,10 @@ public class ButtonListener implements ActionListener {
             }
         }
         if (jButton.equals(Gui.eight)) {
-            if (flag||end) {
+            if (flag || end) {
                 jTextField.setText("8");
                 flag = false;
-                end=false;
+                end = false;
             } else {
                 if (ZERO.equals(jTextField.getText())) {
                     jTextField.setText("8");
@@ -184,10 +221,10 @@ public class ButtonListener implements ActionListener {
             }
         }
         if (jButton.equals(Gui.nine)) {
-            if (flag||end){
+            if (flag || end) {
                 jTextField.setText("9");
                 flag = false;
-                end=false;
+                end = false;
             } else {
                 if (ZERO.equals(jTextField.getText())) {
                     jTextField.setText("9");
@@ -197,6 +234,11 @@ public class ButtonListener implements ActionListener {
 
             }
         }
+
+
+        /*
+        符号的判断及处理
+         */
         if (jButton.equals(Gui.percent)) {
             jTextField.setText(String.valueOf(Double.parseDouble(jTextField.getText()) / 100));
         }
@@ -209,10 +251,14 @@ public class ButtonListener implements ActionListener {
             jTextField.setText("0");
         }
         if (jButton.equals(Gui.back)) {
-            if (jTextField.getText().length() == 1) {
-                jTextField.setText("0");
+            if (end) {
+                return;
             } else {
-                jTextField.setText(jTextField.getText().substring(0, jTextField.getText().length() - 1));
+                if (jTextField.getText().length() == 1) {
+                    jTextField.setText("0");
+                } else {
+                    jTextField.setText(jTextField.getText().substring(0, jTextField.getText().length() - 1));
+                }
             }
         }
         if (jButton.equals(Gui.fractionOf)) {
