@@ -263,15 +263,19 @@ public class ButtonListener implements ActionListener {
         }
         if (jButton.equals(Gui.fractionOf)) {
             jTextField.setText(String.valueOf(1 / Double.parseDouble(jTextField.getText())));
+            end=true;
         }
         if (jButton.equals(Gui.square)) {
             jTextField.setText(String.valueOf(Math.pow(Double.parseDouble(jTextField.getText()), 2)));
+            end=true;
         }
         if (jButton.equals(Gui.squareRoot)) {
             jTextField.setText(String.valueOf(Math.sqrt(Double.parseDouble(jTextField.getText()))));
+            end=true;
         }
         if (jButton.equals(Gui.negative)) {
             jTextField.setText(String.valueOf(-(Double.parseDouble(jTextField.getText()))));
+            end=true;
         }
         if (jButton.equals(Gui.point)) {
             char[] chars = jTextField.getText().toCharArray();
