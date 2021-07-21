@@ -15,6 +15,7 @@ public class Gui extends JFrame {
     JMenu open = new JMenu("打开 "), help = new JMenu("帮助");
     JMenuItem standard = new JMenuItem("标准计算器"), science = new JMenuItem("科学计算器");
     JTextField jTextField = new JTextField("0");
+    int col = 6, row = 4, index = 0;
     static JButton percent = new JButton("%"),
             clearAll = new JButton("CE"),
             clear = new JButton("C"),
@@ -39,6 +40,7 @@ public class Gui extends JFrame {
             zero = new JButton("0"),
             point = new JButton("."),
             equal = new JButton("=");
+    JButton[] jButtons = {percent, clearAll, clear, back, fractionOf, square, squareRoot, divide, seven, eight, nine, multiply, four, five, six, minus, one, two, three, plus, negative, zero, point, equal};
 
 
     public Gui() {
@@ -58,7 +60,7 @@ public class Gui extends JFrame {
         gridBagConstraints.gridheight = 1;
         gridBagConstraints.gridwidth = GridBagConstraints.REMAINDER;
         gridBagLayout.setConstraints(jTextField, gridBagConstraints);
-
+        ButtonListener buttonListener = new ButtonListener(jTextField);
 
         menuBar.add(open);
         menuBar.add(help);
@@ -69,99 +71,20 @@ public class Gui extends JFrame {
         gridBagConstraints.weightx = 0.5;
         gridBagConstraints.weighty = 0.2;
         gridBagConstraints.gridwidth = 1;
-
-        gridBagLayout.setConstraints(percent, gridBagConstraints);
-        this.add(percent);
-        gridBagLayout.setConstraints(clearAll, gridBagConstraints);
-        this.add(clearAll);
-        gridBagLayout.setConstraints(clear, gridBagConstraints);
-        this.add(clear);
-        gridBagConstraints.gridwidth = GridBagConstraints.REMAINDER;
-        gridBagLayout.setConstraints(back, gridBagConstraints);
-        this.add(back);
-        gridBagConstraints.gridwidth = 1;
-
-        gridBagLayout.setConstraints(fractionOf, gridBagConstraints);
-        this.add(fractionOf);
-        gridBagLayout.setConstraints(square, gridBagConstraints);
-        this.add(square);
-        gridBagLayout.setConstraints(squareRoot, gridBagConstraints);
-        this.add(squareRoot);
-        gridBagConstraints.gridwidth = GridBagConstraints.REMAINDER;
-        gridBagLayout.setConstraints(divide, gridBagConstraints);
-        this.add(divide);
-        gridBagConstraints.gridwidth = 1;
-
-        gridBagLayout.setConstraints(seven, gridBagConstraints);
-        this.add(seven);
-        gridBagLayout.setConstraints(eight, gridBagConstraints);
-        this.add(eight);
-        gridBagLayout.setConstraints(nine, gridBagConstraints);
-        this.add(nine);
-        gridBagConstraints.gridwidth = GridBagConstraints.REMAINDER;
-        gridBagLayout.setConstraints(multiply, gridBagConstraints);
-        this.add(multiply);
-        gridBagConstraints.gridwidth = 1;
-
-
-        gridBagLayout.setConstraints(four, gridBagConstraints);
-        this.add(four);
-        gridBagLayout.setConstraints(five, gridBagConstraints);
-        this.add(five);
-        gridBagLayout.setConstraints(six, gridBagConstraints);
-        this.add(six);
-        gridBagConstraints.gridwidth = GridBagConstraints.REMAINDER;
-        gridBagLayout.setConstraints(minus, gridBagConstraints);
-        this.add(minus);
-        gridBagConstraints.gridwidth = 1;
-
-        gridBagLayout.setConstraints(one, gridBagConstraints);
-        this.add(one);
-        gridBagLayout.setConstraints(two, gridBagConstraints);
-        this.add(two);
-        gridBagLayout.setConstraints(three, gridBagConstraints);
-        this.add(three);
-        gridBagConstraints.gridwidth = GridBagConstraints.REMAINDER;
-        gridBagLayout.setConstraints(plus, gridBagConstraints);
-        this.add(plus);
-        gridBagConstraints.gridwidth = 1;
-
-        gridBagLayout.setConstraints(negative, gridBagConstraints);
-        this.add(negative);
-        gridBagLayout.setConstraints(zero, gridBagConstraints);
-        this.add(zero);
-        gridBagLayout.setConstraints(point, gridBagConstraints);
-        this.add(point);
-        gridBagConstraints.gridwidth = GridBagConstraints.REMAINDER;
-        gridBagLayout.setConstraints(equal, gridBagConstraints);
-        this.add(equal);
-        gridBagConstraints.gridwidth = 1;
-
-        ButtonListener buttonListener = new ButtonListener(jTextField);
-        percent.addActionListener(buttonListener);
-        clearAll.addActionListener(buttonListener);
-        clear.addActionListener(buttonListener);
-        back.addActionListener(buttonListener);
-        fractionOf.addActionListener(buttonListener);
-        square.addActionListener(buttonListener);
-        squareRoot.addActionListener(buttonListener);
-        divide.addActionListener(buttonListener);
-        seven.addActionListener(buttonListener);
-        eight.addActionListener(buttonListener);
-        nine.addActionListener(buttonListener);
-        multiply.addActionListener(buttonListener);
-        four.addActionListener(buttonListener);
-        five.addActionListener(buttonListener);
-        six.addActionListener(buttonListener);
-        minus.addActionListener(buttonListener);
-        one.addActionListener(buttonListener);
-        two.addActionListener(buttonListener);
-        three.addActionListener(buttonListener);
-        plus.addActionListener(buttonListener);
-        negative.addActionListener(buttonListener);
-        zero.addActionListener(buttonListener);
-        point.addActionListener(buttonListener);
-        equal.addActionListener(buttonListener);
+        for (int i = 0; i < col; i++) {
+            while (index % row < row&&index<jButtons.length) {
+                gridBagLayout.setConstraints(jButtons[index], gridBagConstraints);
+                if (index % row == 2) {
+                    gridBagConstraints.gridwidth = GridBagConstraints.REMAINDER;
+                }
+                this.add(jButtons[index]);
+                jButtons[index].addActionListener(buttonListener);
+                if (index % row == 3) {
+                    gridBagConstraints.gridwidth = 1;
+                }
+                index++;
+            }
+        }
     }
 
     public static void main(String[] args) {
