@@ -80,12 +80,14 @@ public class Gui extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        setIconImage(Toolkit.getDefaultToolkit().getImage(Gui.class.getResource("Diana.JPG")));
         this.setResizable(false);
         this.setSize(400, 500);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setLayout(gridBagLayout);
         this.setJMenuBar(menuBar);
+
 
         /*
         设置文本框参数并添加到网格
